@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GifTastic</title>
+    <style type="text/css">
+        button,
+        div,
+        form,
+        input {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Giftastic</h1>
+
+        <!--Rendered Buttons will get Dumped Here -->
+        <div id="buttons-view"></div>
+
+        <form id="topic-form">
+            <label for="topic-input"></label>
+            <input type="text" id="topic-input">
+            <br>
+
+            <!-- Button triggers new topic to be added -->
+            <input id="add-topic" type="submit" value="Add your favourite here!">
+        </form>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            // Initial array of topics
+            var topics = ["Marc Marquez", "Valentino Rossi", "Jorge Lorenzo", "Sebastian Vettel", "Charles Leclerc", "Daniel Ricciardo"];
+
+            // Function for displaying topics data
+            function renderButtons() {
+                // emptying button panel
+                $("#buttons-view").empty();
+                // Looping through the array of topics
+                for (var i = 0; i < topics.length; i++) {
+                    var button = $("<button>");
+                    // Adding a class of topic-btn to our button
+                    button.addClass("topic");
+                    // Adding a data-attribute
+                    button.attr("data-name", topics[i]);
+                    // Providing the initial button text
+                    button.text(topics[i]);
+                    // Adding the button to the buttons-view div
+                    $("#buttons-view").append(button);
+                }
+            }
+
+            // This function handles events where a topic button is clicked
+            $("#add-topic").on("click", function (event) {
+                event.preventDefault();
+                // This line grabs the input from the textbox
+                var topic = $("#topic-input").val().trim();
+
+                // Adding topic from the textbox to our array
+                topics.push(topic);
+
+                // Calling renderButtons which handles the processing of our topic array
+                renderButtons();
+            });
+
+            renderButtons();
+            // displaytopicInfo function re-renders the HTML to display the appropriate content
+
+            $("button").on("click", function () {
+                var topic = $(this).attr("data-name");
+                var queryURL =
+                    "https://api.giphy.com/v1/gifs/search?q=" + topic +
+                    "&api_key=wKU8X4pLe2bSbiPMWrz3eOFanUwCf3zW&limit=5&rating=PG";
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                })
+                    .then(function (response) {
+
+                        var results = response.data;
+
+                        for (var i = 0; i < results.length; i++) {
+                            if (results[i].rating !== "r" && results[i].rating !== "pg") {
+                                var gifDiv = $("div");
+
+                                var rating = results[i].rating;
+
+                                var p = $("<p>").text("Rating: " + rating.toUpperCase());
+
+                                var personImage = $("<img>");
+
+                                personImage.attr("src", results[i].images.fixed_height.url);
+                                gifDiv.append(p);
+                                gifDiv.append(personImage);
+
+                            }
+                        }
+                    });
+
+                $("#personImage").on("click", function () {
+                    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+                    var state = $(this).attr("data-state");
+                    // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+                    // Then, set the image's data-state to animate
+                    // Else set src to the data-still value
+                    if (state === "still") {
+                        $(this).attr("src", $(this).attr("data-animate"));
+                        $(this).attr("data-state", "animate");
+                    } else {
+                        $(this).attr("src", $(this).attr("data-still"));
+                        $(this).attr("data-state", "still");
+                    }
+                });
+
+            });
+
+        </script>
+</body>
+
+</html>
