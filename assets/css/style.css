@@ -1,0 +1,43 @@
+body {
+  background: url("../images/motogp-motorcycle-racing.png") no-repeat center
+    center fixed;
+  background-size: cover;
+  font-family: cursive;
+}
+
+h1 {
+  font-family: fantasy;
+  font-size: 50px;
+  color: orangered;
+  text-align: center;
+  padding: 20px;
+}
+#add-topic {
+  background-color: orangered;
+  margin: 30px;
+  font-size: 15px;
+  padding: 10px;
+}
+
+.topic-btn {
+  font-family: cursive;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.topic-btn:hover {
+  color: orangered;
+}
+p {
+  font-weight: bold;
+  font-size: 20px;
+  background-color: orangered;
+  margin-right: 70vw;
+}
+#topic-form {
+  margin-left: 60vw;
+}
