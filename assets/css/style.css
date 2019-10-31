@@ -12,11 +12,21 @@ h1 {
   text-align: center;
   padding: 20px;
 }
-#add-topic {
+
+#topic-form {
   background-color: orangered;
-  margin: 30px;
+  font-weight: bold;
+  margin: 10px;
   font-size: 15px;
-  padding: 10px;
+  padding: 5px;
+}
+
+#add-topic {
+  background-color: black;
+  color: white;
+  margin: 10px;
+  font-size: 15px;
+  padding: 5px;
 }
 
 .topic-btn {
@@ -39,5 +49,10 @@ p {
   margin-right: 70vw;
 }
 #topic-form {
-  margin-left: 60vw;
+  margin-left: 50vw;
+}
+
+.gif-image {
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 }
