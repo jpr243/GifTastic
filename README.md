@@ -10,3 +10,5 @@ and submitting the form on the right portion of the screen. After doing so, the 
 
 The program initially displays the GIFs as still images. To toggle an image between its still and animated states, the user needs to click on the image.
 
+You can view the project here https://jpr243.github.io/GifTastic/
+
